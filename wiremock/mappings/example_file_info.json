@@ -1,0 +1,13 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/file.info"
+    },
+    "response": {
+        "status": 200,
+        "body": "{\"success\":true,\"results\":{\"url\":\"https://s3.amazonaws.com/...\"}}",
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}
