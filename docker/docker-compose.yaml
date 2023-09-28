@@ -12,4 +12,8 @@ services:
             - ~/.flowise:/root/.flowise
         command: /bin/sh -c "sleep 3; flowise start"
     # backend:
-    # frontend:
+    frontend:
+      image: nextjs-docker
+      ports:
+        - '8080:8080'
+      command: npm start
