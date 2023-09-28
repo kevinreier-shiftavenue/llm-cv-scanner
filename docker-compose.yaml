@@ -21,7 +21,7 @@ services:
           context: backend
           dockerfile: dockerfile
       ports:
-          - '5000:5000'
+          - '5050:5000'
     frontend:
       image: llm-cv-scanner-dashboard
       container_name: llm-cv-scanner-dashboard
@@ -32,29 +32,37 @@ services:
       ports:
         - '8080:8080'
       command: npm start
-    minio:
-      command: server /data --console-address ":9001"
-      image: minio/minio
+    wiremock:
+      image: rodolpheche/wiremock
+      container_name: wiremock-container
       ports:
-      - '9000:9000'
-      - '9001:9001'
+        - "6060:8080"
       volumes:
-      - 'minio_data:/data'
-    createbuckets:
-      image: minio/mc
-      depends_on:
-      - minio
-      entrypoint: >
-        /bin/sh -c "
-        sleep 30;
-        /usr/bin/mc config host add myminio http://minio:9000 minioadmin minioadmin;
-        /usr/bin/mc mb --ignore-existing myminio/cvs;
-        /usr/bin/mc cp --recursive ./dummy_data/ myminio/cvs/;
-        exit 0;
-        "
-      volumes:
-      - './backend/sample_data:/dummy_data'
+        - ./wiremock/mappings:/home/wiremock/mappings
+        - ./wiremock/__files:/home/wiremock/__files
+#     minio:
+#       command: server /data --console-address ":9001"
+#       image: minio/minio
+#       ports:
+#       - '9000:9000'
+#       - '9001:9001'
+#       volumes:
+#       - 'minio_data:/data'
+#     createbuckets:
+#       image: minio/mc
+#       depends_on:
+#       - minio
+#       entrypoint: >
+#         /bin/sh -c "
+#         sleep 30;
+#         /usr/bin/mc config host add myminio http://minio:9000 minioadmin minioadmin;
+#         /usr/bin/mc mb --ignore-existing myminio/cvs;
+#         /usr/bin/mc cp --recursive ./dummy_data/ myminio/cvs/;
+#         exit 0;
+#         "
+#       volumes:
+#       - './backend/sample_data:/dummy_data'
 
-volumes:
-    minio_data:
-        driver: local
+# volumes:
+#     minio_data:
+#         driver: local
