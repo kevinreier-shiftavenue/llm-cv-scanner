@@ -5,15 +5,23 @@ services:
         image: flowiseai/flowise
         restart: always
         env_file:
-          - flowise.env
+          - ./envs/flowise.env
         ports:
             - '3000:3000'
         volumes:
             - ~/.flowise:/root/.flowise
         command: /bin/sh -c "sleep 3; flowise start"
     # backend:
+    #   build:
+    #     context: backend
+    #     image: llm-cv-scanner-backend
+    #     dockerfile: ./backend/dockerfile
     frontend:
-      image: nextjs-docker
+      image: llm-cv-scanner-dashboard
+      container_name: llm-cv-scanner-dashboard
+      build:
+        context: frontend/llm-cv-scanner-dashboard
+        dockerfile: dockerfile
       ports:
         - '8080:8080'
       command: npm start
