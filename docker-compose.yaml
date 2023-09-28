@@ -11,14 +11,21 @@ services:
         volumes:
             - ~/.flowise:/root/.flowise
         command: /bin/sh -c "sleep 3; flowise start"
-    # backend:
-    #   build:
-    #     context: backend
-    #     image: llm-cv-scanner-backend
-    #     dockerfile: ./backend/dockerfile
+    backend:
+      container_name: llm-cv-scanner-backend
+      image: llm-cv-scanner-backend
+      restart: always
+      environment:
+        - PORT=5000
+      build:
+          context: backend
+          dockerfile: dockerfile
+      ports:
+          - '5000:5000'
     frontend:
       image: llm-cv-scanner-dashboard
       container_name: llm-cv-scanner-dashboard
+      restart: always
       build:
         context: frontend/llm-cv-scanner-dashboard
         dockerfile: dockerfile
