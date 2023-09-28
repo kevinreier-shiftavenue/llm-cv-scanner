@@ -7,7 +7,11 @@ import {
   InternalError,
   ErrorType,
 } from "./core/ApiError";
-import routes from "./routes";
+
+// Import routes
+import indexRouter from './routes/index';
+import usersRouter from './routes/users';
+import jobsRouter from './routes/jobs';
 
 process.on("uncaughtException", (e) => {
   Logger.error(e);
@@ -21,7 +25,9 @@ app.use(
 );
 
 // Routes
-app.use("/", routes);
+app.use("/", indexRouter);
+app.use("/jobs", jobsRouter);
+app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => next(new NotFoundError()));
