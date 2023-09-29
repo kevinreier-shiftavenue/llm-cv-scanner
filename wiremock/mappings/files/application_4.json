@@ -1,9 +1,9 @@
 {
   "success": true,
   "results": {
-      "id": "2",
+      "id": "4",
       "candidate": {
-          "id": "2",
+          "id": "3",
           "name": "James",
           "primaryEmailAddress": {
               "value": "test@ashbyhq.com",
@@ -22,6 +22,6 @@
           "locationId": "1",
           "departmentId": "1"
       },
-      "appliedViaJobPostingId": "1"
+      "appliedViaJobPostingId": "2"
   }
 }
