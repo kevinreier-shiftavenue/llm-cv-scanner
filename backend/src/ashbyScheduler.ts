@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch'
 import cron from 'node-cron'
 
 export async function initCronJob(schedule: string) {
