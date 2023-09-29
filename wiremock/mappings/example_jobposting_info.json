@@ -1,7 +1,7 @@
 {
     "request": {
         "method": "POST",
-        "url": "/job.info"
+        "url": "/jobPosting.info"
     },
     "response": {
         "status": 200,
