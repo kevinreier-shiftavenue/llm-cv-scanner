@@ -5,6 +5,7 @@ import LogoDevIcon from "@mui/icons-material/LogoDev";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import React from "react";
 
 export default function Home() {
   const [jobData, setJobData] = useState<any>([
@@ -43,15 +44,15 @@ export default function Home() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [jobId, setJobId] = useState<null | number>(null);
 
-  useEffect(() => {
-    try {
-      axios.get("http://localhost:5050/jobs ").then((res) => {
-        console.log(res.data);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  // useEffect(() => {
+  //   try {
+  //     axios.get("http://localhost:5050/jobs ").then((res) => {
+  //       console.log(res.data);
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // });
 
   const handleExpand = (id: number) => {
     if (jobId === id) {
@@ -97,7 +98,7 @@ export default function Home() {
             {isExpanded && jobId === i && (
               <Box width={"100%"} display={"flex"} gap={2}>
                 {item.postings.map((jobPost: any) => (
-                  <Link
+                  <Link key={jobPost.id}
                     href={{
                       pathname: "/jobPage",
                       query: { jobPost: jobPost.id },
