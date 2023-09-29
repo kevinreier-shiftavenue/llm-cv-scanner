@@ -5,7 +5,7 @@
     },
     "response": {
         "status": 200,
-        "bodyFileName": "mappings/files/application_{{jsonPath request.body '$.applicationId'}}.json",
+        "bodyFileName": "application_{{jsonPath request.body '$.applicationId'}}.json",
         "headers": {
             "Content-Type": "application/json"
         }
