@@ -1,0 +1,456 @@
+{
+    "success": true,
+    "moreDataAvailable": true,
+    "nextCursor": "G8",
+    "syncToken": "jYnEBmjzR",
+    "results": [
+      {
+        "id": "2",
+        "createdAt": "2022-08-12T20:29:56.964Z",
+        "updatedAt": "2022-08-12T20:29:56.964Z",
+        "status": "Hired",
+        "customFields": [
+          {
+            "id": "650e5f74-32db-4a0a-b61b-b9afece05023",
+            "title": "Expected start date",
+            "value": "2022-11-10T19:47:56.795Z"
+          }
+        ],
+        "candidate": {
+          "id": "2",
+          "name": "James",
+          "primaryEmailAddress": {
+            "value": "test@ashbyhq.com",
+            "type": "Work",
+            "isPrimary": true
+          },
+          "primaryPhoneNumber": {
+            "value": "test@ashbyhq.com",
+            "type": "Work",
+            "isPrimary": true
+          }
+        },
+        "currentInterviewStage": {
+          "id": "2",
+          "title": "Offer",
+          "type": "Offer",
+          "orderInInterviewPlan": 1006,
+          "interviewPlanId": "2"
+        },
+        "source": {
+          "id": "2",
+          "title": "Applied",
+          "isArchived": false,
+          "sourceType": {
+            "id": "2",
+            "title": "Inbound",
+            "isArchived": false
+          }
+        },
+        "archiveReason": {
+          "id": "2",
+          "text": "Too inexperienced",
+          "reasonType": "RejectedByOrg",
+          "isArchived": false
+        },
+        "job": {
+          "id": "4071538b-3cac-4fbf-ac76-f78ed250ffdd",
+          "title": "First Designer",
+          "locationId": "2",
+          "departmentId": "2"
+        },
+        "creditedToUser": {
+          "id": "2",
+          "firstName": "Test",
+          "lastName": "User",
+          "email": "test@ashbyhq.com",
+          "globalRole": "Organization Admin",
+          "isEnabled": true,
+          "updatedAt": "2022-08-12T20:29:56.964Z"
+        },
+        "hiringTeam": [
+          {
+            "email": "test@ashbyhq.com",
+            "firstName": "Joey",
+            "lastName": "Joe",
+            "role": "Hiring Manager",
+            "userId": "2"
+          }
+        ],
+        "appliedViaJobPostingId": "2",
+        "openings": [
+          {
+            "id": "2",
+            "openedAt": "2022-08-12T20:29:56.964Z",
+            "closedAt": "2022-08-12T20:29:56.964Z",
+            "isArchived": false,
+            "archivedAt": "2022-08-12T20:29:56.964Z",
+            "openingState": "Approved",
+            "latestVersion": {
+              "id": "2",
+              "identifier": "string",
+              "description": "string",
+              "authorId": "2",
+              "createdAt": "2022-08-12T20:29:56.964Z",
+              "teamId": "2",
+              "jobIds": [
+                "2"
+              ],
+              "targetHireDate": "string",
+              "targetStartDate": "string",
+              "isBackfill": true,
+              "employmentType": "FullTime",
+              "locationIds": [
+                "2"
+              ],
+              "hiringTeam": [
+                {
+                  "email": "test@ashbyhq.com",
+                  "firstName": "Joey",
+                  "lastName": "Joe",
+                  "role": "Hiring Manager",
+                  "userId": "2"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "1",
+        "createdAt": "2022-08-12T20:29:56.964Z",
+        "updatedAt": "2022-08-12T20:29:56.964Z",
+        "status": "Hired",
+        "customFields": [
+          {
+            "id": "650e5f74-32db-4a0a-b61b-b9afece05023",
+            "title": "Expected start date",
+            "value": "2022-11-10T19:47:56.795Z"
+          }
+        ],
+        "candidate": {
+          "id": "1",
+          "name": "James",
+          "primaryEmailAddress": {
+            "value": "test@ashbyhq.com",
+            "type": "Work",
+            "isPrimary": true
+          },
+          "primaryPhoneNumber": {
+            "value": "test@ashbyhq.com",
+            "type": "Work",
+            "isPrimary": true
+          }
+        },
+        "currentInterviewStage": {
+          "id": "1",
+          "title": "Offer",
+          "type": "Offer",
+          "orderInInterviewPlan": 1006,
+          "interviewPlanId": "1"
+        },
+        "source": {
+          "id": "1",
+          "title": "Applied",
+          "isArchived": false,
+          "sourceType": {
+            "id": "1",
+            "title": "Inbound",
+            "isArchived": false
+          }
+        },
+        "archiveReason": {
+          "id": "1",
+          "text": "Too inexperienced",
+          "reasonType": "RejectedByOrg",
+          "isArchived": false
+        },
+        "job": {
+          "id": "4071538b-3cac-4fbf-ac76-f78ed250ffdd",
+          "title": "First Designer",
+          "locationId": "1",
+          "departmentId": "1"
+        },
+        "creditedToUser": {
+          "id": "1",
+          "firstName": "Test",
+          "lastName": "User",
+          "email": "test@ashbyhq.com",
+          "globalRole": "Organization Admin",
+          "isEnabled": true,
+          "updatedAt": "2022-08-12T20:29:56.964Z"
+        },
+        "hiringTeam": [
+          {
+            "email": "test@ashbyhq.com",
+            "firstName": "Joey",
+            "lastName": "Joe",
+            "role": "Hiring Manager",
+            "userId": "1"
+          }
+        ],
+        "appliedViaJobPostingId": "1",
+        "openings": [
+          {
+            "id": "1",
+            "openedAt": "2022-08-12T20:29:56.964Z",
+            "closedAt": "2022-08-12T20:29:56.964Z",
+            "isArchived": false,
+            "archivedAt": "2022-08-12T20:29:56.964Z",
+            "openingState": "Approved",
+            "latestVersion": {
+              "id": "1",
+              "identifier": "string",
+              "description": "string",
+              "authorId": "1",
+              "createdAt": "2022-08-12T20:29:56.964Z",
+              "teamId": "1",
+              "jobIds": [
+                "1"
+              ],
+              "targetHireDate": "string",
+              "targetStartDate": "string",
+              "isBackfill": true,
+              "employmentType": "FullTime",
+              "locationIds": [
+                "1"
+              ],
+              "hiringTeam": [
+                {
+                  "email": "test@ashbyhq.com",
+                  "firstName": "Joey",
+                  "lastName": "Joe",
+                  "role": "Hiring Manager",
+                  "userId": "1"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "createdAt": "2022-08-12T20:29:56.964Z",
+        "updatedAt": "2022-08-12T20:29:56.964Z",
+        "status": "Hired",
+        "customFields": [
+          {
+            "id": "650e5f74-32db-4a0a-b61b-b9afece05023",
+            "title": "Expected start date",
+            "value": "2022-11-10T19:47:56.795Z"
+          }
+        ],
+        "candidate": {
+          "id": "3",
+          "name": "James",
+          "primaryEmailAddress": {
+            "value": "test@ashbyhq.com",
+            "type": "Work",
+            "isPrimary": true
+          },
+          "primaryPhoneNumber": {
+            "value": "test@ashbyhq.com",
+            "type": "Work",
+            "isPrimary": true
+          }
+        },
+        "currentInterviewStage": {
+          "id": "3",
+          "title": "Offer",
+          "type": "Offer",
+          "orderInInterviewPlan": 1006,
+          "interviewPlanId": "3"
+        },
+        "source": {
+          "id": "3",
+          "title": "Applied",
+          "isArchived": false,
+          "sourceType": {
+            "id": "3",
+            "title": "Inbound",
+            "isArchived": false
+          }
+        },
+        "archiveReason": {
+          "id": "3",
+          "text": "Too inexperienced",
+          "reasonType": "RejectedByOrg",
+          "isArchived": false
+        },
+        "job": {
+          "id": "4071538b-3cac-4fbf-ac76-f78ed250ffdd",
+          "title": "First Designer",
+          "locationId": "3",
+          "departmentId": "3"
+        },
+        "creditedToUser": {
+          "id": "3",
+          "firstName": "Test",
+          "lastName": "User",
+          "email": "test@ashbyhq.com",
+          "globalRole": "Organization Admin",
+          "isEnabled": true,
+          "updatedAt": "2022-08-12T20:29:56.964Z"
+        },
+        "hiringTeam": [
+          {
+            "email": "test@ashbyhq.com",
+            "firstName": "Joey",
+            "lastName": "Joe",
+            "role": "Hiring Manager",
+            "userId": "3"
+          }
+        ],
+        "appliedViaJobPostingId": "3",
+        "openings": [
+          {
+            "id": "3",
+            "openedAt": "2022-08-12T20:29:56.964Z",
+            "closedAt": "2022-08-12T20:29:56.964Z",
+            "isArchived": false,
+            "archivedAt": "2022-08-12T20:29:56.964Z",
+            "openingState": "Approved",
+            "latestVersion": {
+              "id": "3",
+              "identifier": "string",
+              "description": "string",
+              "authorId": "3",
+              "createdAt": "2022-08-12T20:29:56.964Z",
+              "teamId": "3",
+              "jobIds": [
+                "3"
+              ],
+              "targetHireDate": "string",
+              "targetStartDate": "string",
+              "isBackfill": true,
+              "employmentType": "FullTime",
+              "locationIds": [
+                "3"
+              ],
+              "hiringTeam": [
+                {
+                  "email": "test@ashbyhq.com",
+                  "firstName": "Joey",
+                  "lastName": "Joe",
+                  "role": "Hiring Manager",
+                  "userId": "3"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "createdAt": "2022-08-12T20:29:56.964Z",
+        "updatedAt": "2022-08-12T20:29:56.964Z",
+        "status": "Hired",
+        "customFields": [
+          {
+            "id": "650e5f74-32db-4a0a-b61b-b9afece05023",
+            "title": "Expected start date",
+            "value": "2022-11-10T19:47:56.795Z"
+          }
+        ],
+        "candidate": {
+          "id": "2",
+          "name": "James",
+          "primaryEmailAddress": {
+            "value": "test@ashbyhq.com",
+            "type": "Work",
+            "isPrimary": true
+          },
+          "primaryPhoneNumber": {
+            "value": "test@ashbyhq.com",
+            "type": "Work",
+            "isPrimary": true
+          }
+        },
+        "currentInterviewStage": {
+          "id": "2",
+          "title": "Offer",
+          "type": "Offer",
+          "orderInInterviewPlan": 1006,
+          "interviewPlanId": "2"
+        },
+        "source": {
+          "id": "2",
+          "title": "Applied",
+          "isArchived": false,
+          "sourceType": {
+            "id": "2",
+            "title": "Inbound",
+            "isArchived": false
+          }
+        },
+        "archiveReason": {
+          "id": "2",
+          "text": "Too inexperienced",
+          "reasonType": "RejectedByOrg",
+          "isArchived": false
+        },
+        "job": {
+          "id": "4071538b-3cac-4fbf-ac76-f78ed250ffdd",
+          "title": "First Designer",
+          "locationId": "2",
+          "departmentId": "2"
+        },
+        "creditedToUser": {
+          "id": "2",
+          "firstName": "Test",
+          "lastName": "User",
+          "email": "test@ashbyhq.com",
+          "globalRole": "Organization Admin",
+          "isEnabled": true,
+          "updatedAt": "2022-08-12T20:29:56.964Z"
+        },
+        "hiringTeam": [
+          {
+            "email": "test@ashbyhq.com",
+            "firstName": "Joey",
+            "lastName": "Joe",
+            "role": "Hiring Manager",
+            "userId": "2"
+          }
+        ],
+        "appliedViaJobPostingId": "2",
+        "openings": [
+          {
+            "id": "2",
+            "openedAt": "2022-08-12T20:29:56.964Z",
+            "closedAt": "2022-08-12T20:29:56.964Z",
+            "isArchived": false,
+            "archivedAt": "2022-08-12T20:29:56.964Z",
+            "openingState": "Approved",
+            "latestVersion": {
+              "id": "2",
+              "identifier": "string",
+              "description": "string",
+              "authorId": "2",
+              "createdAt": "2022-08-12T20:29:56.964Z",
+              "teamId": "2",
+              "jobIds": [
+                "2"
+              ],
+              "targetHireDate": "string",
+              "targetStartDate": "string",
+              "isBackfill": true,
+              "employmentType": "FullTime",
+              "locationIds": [
+                "2"
+              ],
+              "hiringTeam": [
+                {
+                  "email": "test@ashbyhq.com",
+                  "firstName": "Joey",
+                  "lastName": "Joe",
+                  "role": "Hiring Manager",
+                  "userId": "2"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }

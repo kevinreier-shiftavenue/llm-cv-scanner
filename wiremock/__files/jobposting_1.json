@@ -1,0 +1,188 @@
+{
+    "success": true,
+    "results": {
+      "id": "1",
+      "title": "Marketing Specialist",
+      "descriptionPlain": "We are seeking a talented Marketing Specialist to join our team. The ideal candidate will have a passion for marketing and a proven track record of success in developing and executing marketing campaigns. Responsibilities: Develop and execute marketing campaigns across multiple channels Conduct market research to identify new opportunities and trends Collaborate with cross-functional teams to develop and implement marketing strategies Analyze campaign performance and adjust strategies as needed Manage budgets and timelines for marketing initiatives Requirements: Bachelor's degree in Marketing or related field 3+ years of experience in marketing Strong project management skills Excellent communication and collaboration skills Experience with marketing automation tools and analytics platforms If you are a creative thinker with a passion for marketing, we encourage you to apply.\n\n",
+      "descriptionHtml": "<p style=\"min-height:1.5em\">This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.</p><h1><br />Requirements</h1><ul style=\"min-height:1.5em\"><li><p style=\"min-height:1.5em\">Experience writing good example job descriptions</p></li><li><p style=\"min-height:1.5em\">Other exemplary skills</p></li><li><p style=\"min-height:1.5em\">3-5 years prior experience in this role</p></li><li><p style=\"min-height:1.5em\">Motivation</p></li><li><p style=\"min-height:1.5em\">Great english language skills<br /></p></li></ul><h1>About the Team</h1><p style=\"min-height:1.5em\"><br />Example org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.</p><p style=\"min-height:1.5em\"></p>",
+      "descriptionSocial": "Example org allows real-time collaboration on important example workflows. When you join as an example role, part of the example team, you will perform a critical role in various example workflows.",
+      "descriptionParts": {
+        "descriptionOpening": {
+          "html": null,
+          "plain": null
+        },
+        "descriptionBody": {
+          "html": "<p style=\"min-height:1.5em\">This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.</p><h1><br />Requirements</h1><ul style=\"min-height:1.5em\"><li><p style=\"min-height:1.5em\">Experience writing good example job descriptions</p></li><li><p style=\"min-height:1.5em\">Other exemplary skills</p></li><li><p style=\"min-height:1.5em\">3-5 years prior experience in this role</p></li><li><p style=\"min-height:1.5em\">Motivation</p></li><li><p style=\"min-height:1.5em\">Great english language skills<br /></p></li></ul></p>",
+          "plain": "This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.\\n\\n\\n\\nREQUIREMENTS\\n\\n - Experience writing good example job descriptions\\n\\n - Other exemplary skills\\n\\n - 3-5 years prior experience in this role\\n\\n - Motivation\\n\\n - Great english language skills\\n"
+        },
+        "descriptionClosing": {
+          "html": "<h1>About the Team</h1><p style=\"min-height:1.5em\"><br />Example org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.</p>",
+          "plain": "ABOUT THE TEAM\\n\\n\\nExample org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.\\n\\n"
+        }
+      },
+      "departmentName": "Test Team",
+      "teamName": "Test Team",
+      "jobId": "1",
+      "locationName": "Springfield",
+      "locationIds": {
+        "primaryLocationId": "1",
+        "secondaryLocationIds": [
+          "1"
+        ]
+      },
+      "linkedData": {
+        "@context": "https://schema.org/",
+        "@type": "JobPosting",
+        "title": "Posting Title",
+        "description": "<p style=\"min-height:1.5em\">This example role will be part of an example team and will report to the example manager. The new hire plays a critical role in various example workflows.</p><h1><br />Requirements</h1><ul style=\"min-height:1.5em\"><li><p style=\"min-height:1.5em\">Experience writing good example job descriptions</p></li><li><p style=\"min-height:1.5em\">Other exemplary skills</p></li><li><p style=\"min-height:1.5em\">3-5 years prior experience in this role</p></li><li><p style=\"min-height:1.5em\">Motivation</p></li><li><p style=\"min-height:1.5em\">Great english language skills<br /></p></li></ul><h1>About the Team</h1><p style=\"min-height:1.5em\"><br />Example org is a leading software company. Example org allows real-time collaboration on important example workflows. Founded in 2012 we have over 10,000 customers worldwide and are backed by fantastic investors such as Sequoia Capital.</p><p style=\"min-height:1.5em\"></p>",
+        "identifier": {
+          "@type": "PropertyValue",
+          "name": "Posting Title",
+          "value": "4be0e8c0-9323-43a0-ab48-506789ab9c16"
+        },
+        "datePosted": "2022-07-22",
+        "hiringOrganization": {
+          "@type": "Organization",
+          "name": "Example org",
+          "sameAs": "34d7c77d-e9b2-5a09-a882-cb23a225f2ec.com"
+        },
+        "jobLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress"
+          }
+        },
+        "employmentType": "FULL_TIME"
+      },
+      "publishedDate": "2022-07-22",
+      "address": {
+        "postalAddress": {
+          "addressCountry": "United States",
+          "addressRegion": "California",
+          "addressLocality": "San Francisco"
+        }
+      },
+      "isRemote": true,
+      "employmentType": "FullTime",
+      "applicationFormDefinition": {
+        "sections": [
+          {
+            "title": "string",
+            "descriptionHtml": "string",
+            "descriptionPlain": "string",
+            "fields": [
+              {
+                "isRequired": true,
+                "descriptionHtml": "string",
+                "descriptionPlain": "string",
+                "field": {
+                  "id": "1",
+                  "type": "String",
+                  "path": "_systemfield_name",
+                  "humanReadablePath": "Name",
+                  "title": "Name",
+                  "isNullable": false,
+                  "selectableValues": {
+                    "label": "string",
+                    "value": "string"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "isListed": true,
+      "externalLink": "https://jobs.ashbyhq.com/70b51cc4-7f34-5567-92bd-96f354f7439a/4be0e8c0-9323-43a0-ab48-506789ab9c16",
+      "compensation": {
+        "compensationTierSummary": "$72K – $270K • 1% – 2.25% • Offers Bonus • Multiple Ranges",
+        "summaryComponents": [
+          {
+            "summary": "€72K – €270K",
+            "componentType": "Salary",
+            "interval": "1 YEAR",
+            "currencyCode": "EUR",
+            "minValue": 72023.45,
+            "maxValue": 270450
+          },
+          {
+            "summary": "1% – 2.25%",
+            "componentType": "EquityPercentage",
+            "interval": "NONE",
+            "minValue": 1,
+            "maxValue": 2.25
+          },
+          {
+            "summary": "Offers Bonus",
+            "componentType": "Bonus",
+            "interval": "1 YEAR",
+            "minValue": null,
+            "maxValue": null
+          }
+        ],
+        "compensationTiers": [
+          {
+            "id": "da53719f-a115-400b-9d30-9b875428f1e7",
+            "title": "Zone A",
+            "additionalInformation": null,
+            "components": [
+              {
+                "id": "fb8efeaa-bea1-4713-9012-cbd25fc3dc89",
+                "summary": "€72K – €100K",
+                "componentType": "Salary",
+                "interval": "1 YEAR",
+                "currencyCode": "EUR",
+                "minValue": 72023.45,
+                "maxValue": 100000
+              },
+              {
+                "id": "93c62578-ed5d-42dd-8186-64ad5ba5603d",
+                "summary": "1% – 1.4%",
+                "componentType": "EquityPercentage",
+                "interval": "NONE",
+                "minValue": 1,
+                "maxValue": 1.4
+              }
+            ],
+            "tierSummary": "€72K – €100K • 1% – 1.4%"
+          },
+          {
+            "id": "81362ab1-739e-44f5-88d9-dbc5c731624c",
+            "title": "Zone B",
+            "additionalInformation": "Commuter Benefits",
+            "components": [
+              {
+                "id": "fb8efeaa-bea1-4713-9012-cbd25fc3dc89",
+                "summary": "€72K – €100K",
+                "componentType": "Salary",
+                "interval": "1 YEAR",
+                "currencyCode": "EUR",
+                "minValue": 95010.12,
+                "maxValue": 270450
+              },
+              {
+                "id": "93c62578-ed5d-42dd-8186-64ad5ba5603d",
+                "summary": "1.8% – 2.511%",
+                "componentType": "EquityPercentage",
+                "interval": "NONE",
+                "minValue": 1.8,
+                "maxValue": 2.511
+              },
+              {
+                "id": null,
+                "summary": "Offers Bonus",
+                "componentType": "Bonus",
+                "interval": "1 YEAR",
+                "minValue": null,
+                "maxValue": null
+              }
+            ],
+            "tierSummary": "€95K – €270K • 1.8% – 2.511% • Offers Bonus • Commuter Benefits"
+          }
+        ],
+        "shouldDisplayCompensationOnJobBoard": true
+      },
+      "updatedAt": "2022-08-12T20:29:56.964Z",
+      "applicationLimitCalloutHtml": "<div>\n  <p>Please Note: we have set up limits for applications for this role. It is in the <strong>Product Limit </strong> group. The following limits apply to applications for all jobs within this group:</p>\n  <ul>\n    <li>\n      <p>Candidates may not apply more than 1 time in any 60 day span for any job in the <strong>Product Limit </strong> Group.</p>\n    </li>\n  </ul>\n</div>\n"
+    }
+  }

@@ -1,0 +1,27 @@
+{
+    "success": true,
+    "results": {
+        "id": "1",
+        "candidate": {
+            "id": "1",
+            "name": "James",
+            "primaryEmailAddress": {
+                "value": "test@ashbyhq.com",
+                "type": "Work",
+                "isPrimary": true
+            },
+            "primaryPhoneNumber": {
+                "value": "test@ashbyhq.com",
+                "type": "Work",
+                "isPrimary": true
+            }
+        },
+        "job": {
+            "id": "1",
+            "title": "First Designer",
+            "locationId": "1",
+            "departmentId": "1"
+        },
+        "appliedViaJobPostingId": "1"
+    }
+}

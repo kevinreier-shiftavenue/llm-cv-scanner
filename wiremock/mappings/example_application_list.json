@@ -1,0 +1,13 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/application.list"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "application_list_init.json",
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}

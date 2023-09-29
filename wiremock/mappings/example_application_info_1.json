@@ -1,0 +1,18 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/application.info",
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$[?(@.id == '1')]"
+            }
+        ]
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "application_1.json",
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}

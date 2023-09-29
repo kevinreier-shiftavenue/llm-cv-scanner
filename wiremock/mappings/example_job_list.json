@@ -1,0 +1,13 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/job.list"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "job_list.json",
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}
