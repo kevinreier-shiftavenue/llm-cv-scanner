@@ -10,12 +10,12 @@ export default function Home() {
   const [jobData, setJobData] = useState<any>([
     {
       id: 1,
-      title: "Nextaim",
+      title: "Team Lead",
       location: "Munich",
       postings: [
         {
           id: "fa",
-          title: "Team Lead",
+          title: "Frontend develop",
         },
         {
           id: "fb",
@@ -25,16 +25,16 @@ export default function Home() {
     },
     {
       id: 2,
-      title: "Shift Avenue",
+      title: "Marketing Manager",
       location: "Munich",
       postings: [
         {
           id: "fs",
-          title: "Marketing Manager",
+          title: "Sales",
         },
         {
           id: "fd",
-          title: "Backend Developer",
+          title: "Accounting",
         },
       ],
     },
@@ -43,15 +43,15 @@ export default function Home() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [jobId, setJobId] = useState<null | number>(null);
 
-  // useEffect(() => {
-  //   try {
-  //     axios.get("http://localhost:5050/jobs").then((res) => {
-  //       console.log(res.data);
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // });
+  useEffect(() => {
+    try {
+      axios.get("http://localhost:5050/jobs ").then((res) => {
+        console.log(res.data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  });
 
   const handleExpand = (id: number) => {
     if (jobId === id) {
@@ -85,7 +85,7 @@ export default function Home() {
               width={"100%"}
             >
               <Box display={"flex"} gap={2}>
-                <Typography>Company: <span style={{fontWeight:"bold"}}>{item.title}</span></Typography>
+                <Typography>Job Title: <span style={{fontWeight:"bold"}}>{item.title}</span></Typography>
                 <Typography>Location:  <span style={{fontWeight:"bold"}}>{item.location}</span></Typography>
               </Box>
               <ExpandMoreIcon
