@@ -1,20 +1,57 @@
 import { Box, Grid, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CoPresentIcon from '@mui/icons-material/CoPresent';
-import LogoDevIcon from '@mui/icons-material/LogoDev';
+import CoPresentIcon from "@mui/icons-material/CoPresent";
+import LogoDevIcon from "@mui/icons-material/LogoDev";
 import Link from "next/link";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Home() {
-  const [jobData,setJobData] = useState<any>()
+  const [jobData, setJobData] = useState<any>([
+    {
+      id: 1,
+      title: "Nextaim",
+      location: "Munich",
+      postings: [
+        {
+          id: "fa",
+          title: "Team Lead",
+        },
+        {
+          id: "fb",
+          title: "QA Automation",
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "Shift Avenue",
+      location: "Munich",
+      postings: [
+        {
+          id: "fs",
+          title: "Marketing Manager",
+        },
+        {
+          id: "fd",
+          title: "Backend Developer",
+        },
+      ],
+    },
+  ]);
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [jobId, setJobId] = useState<null | number>(null);
-  
-  useEffect(() => {
-    // axios.get()
-  });
+
+  // useEffect(() => {
+  //   try {
+  //     axios.get("http://localhost:5050/jobs").then((res) => {
+  //       console.log(res.data);
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // });
 
   const handleExpand = (id: number) => {
     if (jobId === id) {
@@ -25,11 +62,11 @@ export default function Home() {
   return (
     <Box width={"100%"} height={"100vh"} py={2} px={5}>
       <Box sx={{ display: "flex", justifyContent: "space-between" }} mb={8}>
-        <LogoDevIcon fontSize="large"/>
-        <CoPresentIcon fontSize="medium"/>
+        <LogoDevIcon fontSize="large" />
+        <CoPresentIcon fontSize="medium" />
       </Box>
       <Grid container>
-        {jobData.map((item:any, i:number) => (
+        {jobData.map((item: any, i: number) => (
           <Grid
             key={i}
             item
@@ -37,37 +74,44 @@ export default function Home() {
             display={"flex"}
             flexDirection={"column"}
             alignItems={"center"}
-            sx={{ border: "1px solid black",borderRadius:"15px" }}
+            sx={{ border: "1px solid black", borderRadius: "15px" }}
             mt={2}
             p={2}
           >
-            <Box display={"flex"} justifyContent={"space-between"} width={"100%"}>
-              <Typography>{item.jobName}</Typography>
+            <Box
+              display={"flex"}
+              justifyContent={"space-between"}
+              alignContent={"center"}
+              width={"100%"}
+            >
+              <Box display={"flex"} gap={2}>
+                <Typography>Company: <span style={{fontWeight:"bold"}}>{item.title}</span></Typography>
+                <Typography>Location:  <span style={{fontWeight:"bold"}}>{item.location}</span></Typography>
+              </Box>
               <ExpandMoreIcon
-              onClick={() => {
-                setJobId(i), handleExpand(i);
-              }}
-            />
+                onClick={() => {
+                  setJobId(i), handleExpand(i);
+                }}
+              />
             </Box>
             {isExpanded && jobId === i && (
-              <Box display={"flex"}>
-                <Box display={"flex"}>                 
+              <Box width={"100%"} display={"flex"} gap={2}>
+                {item.postings.map((jobPost: any) => (
                   <Link
                     href={{
                       pathname: "/jobPage",
-                      query: { jobName: item.jobName,jobOpenings:item.jobOpenings },
+                      query: { jobPost: jobPost.id },
                     }}
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
                       color: "green",
+                      textDecoration: "none"
                     }}
                   >
-                    <Typography>{item.jobOpenings}</Typography>
+                    <Typography>{jobPost.title}</Typography>
                   </Link>
-                </Box>
+                ))}
               </Box>
-            )}         
+            )}
           </Grid>
         ))}
       </Grid>
