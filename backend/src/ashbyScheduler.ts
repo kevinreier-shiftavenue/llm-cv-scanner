@@ -17,7 +17,9 @@ export async function initCronJob(schedule: string) {
           body: JSON.stringify({}), //TODO: Put something in request body??
         })
           .then((response: any) => response.json())
-          .then((data: any) => console.log(data))
+          .then((data: any) => {
+            // console.log(data)
+        })
           .catch((error: any) => console.error('Error fetching job list from Ashby:', error));
       
         fetch(url + "/application.list", {
@@ -28,7 +30,9 @@ export async function initCronJob(schedule: string) {
           body: JSON.stringify({}), //TODO: Put something in request body??
         })
           .then((response: any) => response.json())
-          .then((data: any) => console.log(data))
+          .then((data: any) => {
+            // console.log(data)
+          })
           .catch((error: any) => console.error('Error fetching application list from Ashby:', error));
       
         // TODO: extract job IDs and Application IDs from response, compare IDs to Mongo DB. If Application ID is new -> pull CV and Job and do AI magic

@@ -27,7 +27,7 @@ app.use(
 // Routes
 app.use("/", indexRouter);
 app.use("/jobs", jobsRouter);
-app.use("/users", usersRouter);
+// app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => next(new NotFoundError()));
