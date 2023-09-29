@@ -11,6 +11,14 @@ services:
       volumes:
           - ~/.flowise:/root/.flowise
       command: /bin/sh -c "sleep 3; flowise start"
+    flowise_init:
+      image: alpine/curl
+      depends_on:
+        - flowise
+      volumes:
+          - ./configs/flowise/:/flowise_init/
+      command: |
+        sleep 10 && curl -v http://flowise:3000/api/v1/chatflows -X POST --data @/flowise_init/flow.json -H "Content-Type: application/json" 
     backend:
       container_name: llm-cv-scanner-backend
       image: llm-cv-scanner-backend
