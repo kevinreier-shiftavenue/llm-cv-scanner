@@ -5,7 +5,7 @@
     },
     "response": {
         "status": 200,
-        "body": "{\"success\":true,\"results\":{\"url\":\"https://s3.amazonaws.com/...\"}}",
+        "bodyFileName": "mappings/files/file_{{jsonPath request.body '$.id'}}.json",
         "headers": {
             "Content-Type": "application/json"
         }

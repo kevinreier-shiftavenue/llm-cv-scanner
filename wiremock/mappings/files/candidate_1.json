@@ -1,0 +1,90 @@
+{
+    "success": true,
+    "results": {
+      "id": "1",
+      "createdAt": "2022-08-12T20:29:56.964Z",
+      "name": "Adam Hart",
+      "primaryEmailAddress": {
+        "value": "test@ashbyhq.com",
+        "type": "Work",
+        "isPrimary": true
+      },
+      "emailAddresses": [
+        {
+          "value": "test@ashbyhq.com",
+          "type": "Work",
+          "isPrimary": true
+        }
+      ],
+      "primaryPhoneNumber": {
+        "value": "test@ashbyhq.com",
+        "type": "Work",
+        "isPrimary": true
+      },
+      "phoneNumbers": [
+        {
+          "value": "test@ashbyhq.com",
+          "type": "Work",
+          "isPrimary": true
+        }
+      ],
+      "socialLinks": [
+        {
+          "url": "https://linkedin.com/in/user",
+          "type": "LinkedIn"
+        }
+      ],
+      "tags": [
+        {
+          "id": "1",
+          "title": "Senior Candidate",
+          "isArchived": false
+        }
+      ],
+      "position": "Software Engineer",
+      "company": "Auction.com",
+      "school": "Princeton University",
+      "applicationIds": [
+        "1"
+      ],
+      "resumeFileHandle": {
+        "id": "15d2624d-0a81-4f94-a2ed-94980f430b3f",
+        "name": "resume.pdf",
+        "handle": "eyJoYW5kbGUiOnsidHlwZSI6IkNhbmRpZGF0ZUZpbGUiLCJm"
+      },
+      "fileHandles": [
+        {
+          "id": "15d2624d-0a81-4f94-a2ed-94980f430b3f",
+          "name": "resume.pdf",
+          "handle": "eyJoYW5kbGUiOnsidHlwZSI6IkNhbmRpZGF0ZUZpbGUiLCJm"
+        }
+      ],
+      "customFields": [
+        {
+          "id": "650e5f74-32db-4a0a-b61b-b9afece05023",
+          "title": "Expected start date",
+          "value": "2022-11-10T19:47:56.795Z"
+        }
+      ],
+      "profileUrl": "string",
+      "source": {
+        "id": "1",
+        "title": "Applied",
+        "isArchived": false,
+        "sourceType": {
+          "id": "1",
+          "title": "Inbound",
+          "isArchived": false
+        }
+      },
+      "creditedToUser": {
+        "id": "1",
+        "firstName": "Test",
+        "lastName": "User",
+        "email": "test@ashbyhq.com",
+        "globalRole": "Organization Admin",
+        "isEnabled": true,
+        "updatedAt": "2022-08-12T20:29:56.964Z"
+      }
+    }
+  }
