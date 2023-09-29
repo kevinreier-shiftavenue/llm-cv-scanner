@@ -5,7 +5,7 @@
     },
     "response": {
         "status": 200,
-        "bodyFileName": "mappings/files/application_list_init.json",
+        "bodyFileName": "application_list_init.json",
         "headers": {
             "Content-Type": "application/json"
         }
