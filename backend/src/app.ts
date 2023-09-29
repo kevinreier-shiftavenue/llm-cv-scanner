@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import Logger from "./core/Logger";
 import { environment } from "./config";
+import cors from 'cors'
 import {
   NotFoundError,
   ApiError,
@@ -18,6 +19,7 @@ process.on("uncaughtException", (e) => {
 });
 
 const app = express();
+app.use(cors())
 
 app.use(express.json({ limit: "10mb" }));
 app.use(
