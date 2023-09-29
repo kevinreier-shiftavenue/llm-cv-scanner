@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 
-let formData = new FormData();
+/* let formData = new FormData();
 formData.append("files", input.files[0])
 formData.append("openAIApiKey", String(process.env.MONGO_PASSWORD))
 formData.append("stripNewLines", "true")
@@ -21,4 +21,4 @@ async function query(formData: FormData) {
 
 query(formData).then((response) => {
     console.log(response);
-});
+}); */

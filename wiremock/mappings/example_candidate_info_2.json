@@ -1,0 +1,18 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/candidate.info",
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$[?(@.id == '2')]"
+            }
+        ]
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "candidate_2.json",
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}
