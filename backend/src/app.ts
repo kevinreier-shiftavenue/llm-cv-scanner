@@ -11,7 +11,7 @@ import {
 
 // Import routes
 import indexRouter from './routes/index';
-import usersRouter from './routes/users';
+import jobPostingsRouter from './routes/jobPostings';
 import jobsRouter from './routes/jobs';
 
 process.on("uncaughtException", (e) => {
@@ -29,6 +29,7 @@ app.use(
 // Routes
 app.use("/", indexRouter);
 app.use("/jobs", jobsRouter);
+app.use("/jobPostings", jobPostingsRouter);
 // app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
