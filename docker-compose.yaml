@@ -51,3 +51,4 @@ services:
       volumes:
         - ./wiremock/mappings:/home/wiremock/mappings
         - ./wiremock/__files:/home/wiremock/__files
+      entrypoint: ["/docker-entrypoint.sh", "--global-response-templating", "--disable-gzip", "--verbose"]

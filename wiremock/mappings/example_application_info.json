@@ -1,0 +1,13 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/application.info"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "application_{{jsonPath request.body '$.id'}}.json",
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}
