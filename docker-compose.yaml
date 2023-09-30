@@ -11,27 +11,28 @@ services:
       volumes:
           - ~/.flowise:/root/.flowise
       command: /bin/sh -c "sleep 3; flowise start"
-    flowise_init:
-      image: alpine/curl
-      depends_on:
-        - flowise
-      volumes:
-          - ./configs/flowise/:/flowise_init/
-      command: |
-        sleep 10 && curl -v http://flowise:3000/api/v1/chatflows -X POST --data @/flowise_init/flow.json -H "Content-Type: application/json" 
-    backend:
-      container_name: llm-cv-scanner-backend
-      image: llm-cv-scanner-backend
-      restart: always
-      env_file:
-        - ./envs/backend.env
-      environment:
-        - PORT=5000
-      build:
-          context: backend
-          dockerfile: dockerfile
-      ports:
-          - '5050:5000'
+    # flowise_init:
+    #   image: alpine/curl
+    #   depends_on:
+    #     - flowise
+    #   volumes:
+    #       - ./configs/flowise/:/flowise_init/
+    #   command: |
+    #     curl -v http://flowise:3000/api/v1/chatflows -X POST --data @/flowise_init/pdf_eval_chatflow.json -H "Content-Type: application/json" && sleep 1000
+    
+    # backend:
+    #   container_name: llm-cv-scanner-backend
+    #   image: llm-cv-scanner-backend
+    #   restart: always
+    #   env_file:
+    #     - ./envs/backend.docker.env
+    #   environment:
+    #     - PORT=5000
+    #   build:
+    #       context: backend
+    #       dockerfile: dockerfile
+    #   ports:
+    #       - '5050:5000'
     frontend:
       image: llm-cv-scanner-dashboard
       container_name: llm-cv-scanner-dashboard

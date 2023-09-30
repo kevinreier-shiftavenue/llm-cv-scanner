@@ -6,8 +6,8 @@ import app from './app';
 import { connectMongo } from './mongoClient'
 import { initCronJob } from './ashbyScheduler'
 
-connectMongo().catch(console.dir);
-initCronJob('*/10 * * * * *');
+// connectMongo().catch(console.dir);
+// initCronJob('*/10 * * * * *');
 
 app
   .listen(port, () => {

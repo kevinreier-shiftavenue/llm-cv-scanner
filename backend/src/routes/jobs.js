@@ -24,7 +24,7 @@ router.get('/', async (req, res) =>  {
         if (job_data.success) {
             console.log("job pulled successfully")
             const job_title = job_data.results.title
-            const job_loc_name = job_data.results.location.job_loc_name
+            const job_loc_name = job_data.results.location.name
             let job_posting_ids = job_data.results.jobPostingIds
             let postings = []
 

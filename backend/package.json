@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "tsc-watch --onSuccess \"sh -c 'tsc-alias -p tsconfig.json & node dist/server.js'\""
+    "build": "tsc",
+    "dev2": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "dev": "tsc-watch --onSuccess \"sh -c 'tsc-alias -p tsconfig.json & node dist/server.js'\"",
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "@types/cors": "^2.8.14",
@@ -14,12 +17,15 @@
     "debug": "~2.6.9",
     "dotenv": "^16.3.1",
     "express": "~4.16.1",
+    "fs-extra": "^11.1.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "mongodb": "^6.1.0",
     "morgan": "~1.9.1",
     "node-cron": "^3.0.2",
     "node-fetch": "^2.7.0",
+    "openai": "^4.11.0",
+    "pdf-parse": "^1.1.1",
     "tsc-alias": "^1.8.8"
   },
   "devDependencies": {

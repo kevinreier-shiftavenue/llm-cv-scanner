@@ -13,6 +13,7 @@ import {
 import indexRouter from './routes/index';
 import jobPostingsRouter from './routes/jobPostings';
 import jobsRouter from './routes/jobs';
+import openAIRouter from './routes/openai';
 
 process.on("uncaughtException", (e) => {
   Logger.error(e);
@@ -30,7 +31,7 @@ app.use(
 app.use("/", indexRouter);
 app.use("/jobs", jobsRouter);
 app.use("/jobPostings", jobPostingsRouter);
-// app.use("/users", usersRouter);
+app.use("/cvscan", openAIRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => next(new NotFoundError()));

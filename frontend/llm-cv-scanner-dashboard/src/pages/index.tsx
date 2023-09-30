@@ -8,51 +8,23 @@ import axios from "axios";
 import React from "react";
 
 export default function Home() {
-  const [jobData, setJobData] = useState<any>([
-    {
-      id: 1,
-      title: "Team Lead",
-      location: "Munich",
-      postings: [
-        {
-          id: "fa",
-          title: "Frontend develop",
-        },
-        {
-          id: "fb",
-          title: "QA Automation",
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: "Marketing Manager",
-      location: "Munich",
-      postings: [
-        {
-          id: "fs",
-          title: "Sales",
-        },
-        {
-          id: "fd",
-          title: "Accounting",
-        },
-      ],
-    },
-  ]);
+  const [jobData, setJobData] = useState<any>([]);
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [jobId, setJobId] = useState<null | number>(null);
 
-  // useEffect(() => {
-  //   try {
-  //     axios.get("http://localhost:5050/jobs ").then((res) => {
-  //       console.log(res.data);
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // });
+  useEffect(() => {
+
+    axios.get("http://localhost:5050/jobs ")
+    .then((res) => {
+      setJobData(res.data.jobs_response);
+      console.log(res.data.jobs_response);
+    })
+    .catch(error => {
+      console.log(error)
+    });
+
+  }, []);
 
   const handleExpand = (id: number) => {
     if (jobId === id) {
@@ -66,7 +38,11 @@ export default function Home() {
         <LogoDevIcon fontSize="large" />
         <CoPresentIcon fontSize="medium" />
       </Box>
+      <Box >
+        <h2>Jobs</h2>
+      </Box>
       <Grid container>
+        {jobData.length <= 0 ? <div>No Jobs to display</div> : <></>}
         {jobData.map((item: any, i: number) => (
           <Grid
             key={i}
@@ -96,6 +72,16 @@ export default function Home() {
               />
             </Box>
             {isExpanded && jobId === i && (
+              <Grid
+                key={i}
+                item
+                xs={12}
+                display={"flex"}
+                flexDirection={"column"}
+                justifyContent={"left"}
+                mt={2}
+                p={2}
+              >
               <Box width={"100%"} display={"flex"} gap={2}>
                 {item.postings.map((jobPost: any) => (
                   <Link key={jobPost.id}
@@ -112,6 +98,7 @@ export default function Home() {
                   </Link>
                 ))}
               </Box>
+              </Grid>
             )}
           </Grid>
         ))}
