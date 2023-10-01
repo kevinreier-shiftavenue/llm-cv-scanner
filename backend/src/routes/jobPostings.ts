@@ -1,18 +1,31 @@
-const express = require('express');
-const router = express.Router();
+import {Router, Request, Response} from 'express'
 import fetch from 'node-fetch'
 
+const router = Router();
 
-router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
-  });
+type JobPostingResult = {
+    id: string;
+    title: string;
+    location: string;
+    description: string;
+    applications: object[]
+  };
+
 
 // Define a route to get all jobs
 router.get('/:jobPostingId', async (req, res) =>  {
     const jobPostingId = req.params.jobPostingId;
     console.log("try fetching job posting for jopPostingId "+jobPostingId+" from ashby")
     const url = process.env.ASHBY_API_URL
-    var result = {};
+    var result: JobPostingResult;
+
+    result = {
+        id: "",
+        title: "",
+        location: "",
+        description: "",
+        applications: []
+    }
 
     
     //TODO: from the database fetch the associated applications for the jobPostingId
@@ -45,7 +58,7 @@ router.get('/:jobPostingId', async (req, res) =>  {
         result.description = jobPosting_desc
     }
     else {
-        const errorMessage = 'An error occurred while getting the job data for job ' + jobID + '!';
+        const errorMessage = 'An error occurred while getting the data for jobPosting ' + jobPostingId + '!';
         const statusCode = 500; // Internal Server Error
 
         // Set the status code and send the error message

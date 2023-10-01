@@ -1,6 +1,6 @@
-const express = require('express');
-const router = express.Router();
-import {getCVtoJobMatch} from '../openai/openai'
+import {Router, Request, Response} from 'express'
+const router = Router();
+import {getCVtoJobMatch} from '../openaiApi/cvMatching'
 
 
 // Define a route to get all jobs

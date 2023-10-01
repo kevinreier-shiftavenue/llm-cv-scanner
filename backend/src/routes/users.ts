@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+import {Router, Request, Response} from 'express'
+const router = Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {

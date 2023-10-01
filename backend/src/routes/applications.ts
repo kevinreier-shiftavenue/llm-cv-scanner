@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+import {Router, Request, Response} from 'express'
+const router = Router();
 
 
 //TODO: Pull info
