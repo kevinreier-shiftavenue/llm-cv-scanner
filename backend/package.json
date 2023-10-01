@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "dev2": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "dev": "tsc-watch --onSuccess \"sh -c 'tsc-alias -p tsconfig.json & node dist/server.js'\"",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "start": "node dist/server.js"
   },
   "dependencies": {
