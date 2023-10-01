@@ -9,15 +9,12 @@ const openai_model = 'gpt-3.5-turbo'
 const SYSTEM_CONFIG_PROMPT = `
 For this task you will receive both a candidate CV and a job description. 
 Please analyze and understand each. After that please provide a number that 
-determines how strong the candidate fits the job description, 
-a verdict that says if the candidate is a Good, Medium or Bad Fit for the role, 
-and lastly a short reasoning why.
-The score and the verdict should map as follows: score 0.0 until 3.0 is a Bad Fit, 
-3.1 until 6.0 is a Medium Fit, 6.1 until 8.5 is a Good Fit and everything scored 8.6 until 10 is a Perfect Fit.
+determines how strong the candidate fits the job description based on their skills and experience and the 
+requirements stated in the job description and a short reasoning behind the score.
 The matching should be extremely strict and for a candidate to receive a score higher than 6.0 
-they should fit the description almost perfectly.
-If the provided CV Text is not really a CV don't math it against the job description 
-and instead return Bad fit and a score of 0.0 together with a short rejection reasoning.
+they should fit the description almost perfectly and match at least some of the fixed requirements like degrees or certificates.
+If the provided CV Text is not really a CV don't match it against the job description 
+and instead return a score of 0.0 together with a short rejection reasoning.
 `
 
 const SUMMARIZE_CV_PROMPT = `
@@ -104,6 +101,18 @@ async function getPdfText(pdf: any) {
     return data.text;
 }
 
+function evaluateMatch(score: number): string {
+    if (score < 2.5) {
+        return 'Bad Match';
+    } else if (score <= 5.0) {
+        return 'Medium Match';
+    } else if (score <= 7.5) {
+        return 'Good Match';
+    } else {
+        return 'Perfect Match';
+    }
+}
+
 export async function summarizeCV(cv_url: string) {
     console.log("attempt connection to openai api")
 
@@ -182,16 +191,12 @@ export async function getCVtoJobMatch(cv_url: string, job_desc: string){
                         "type": "number",
                         "description": "A score of how well the CV fits the Job description. Score mut be a number between 0.0 and 10.0"
                       },
-                      "verdict": {
-                        "type": "string",
-                        "description": "The verdict in comprehensible words if the candidate is a good choice or not. Must be one of 'Perfect Fit', 'Good Fit', 'Medium Fit' or 'Bad Fit' based on fit_score"
-                      },
                       "reasoning": {
                         "type": "string",
                         "description": "A short explanation of the decision why the candidate is a good fit or not."
                       }
                     },
-                    "required": ["fit_score", "verdict", "reasoning"]
+                    "required": ["fit_score", "reasoning"]
                   }
                 }
               ],
