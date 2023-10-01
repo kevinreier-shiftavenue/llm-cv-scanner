@@ -4,32 +4,6 @@ import OpenAI from 'openai';
 
 const openai = new OpenAI();
 
-async function getPdf(url: string) {
-    try {
-        // Fetch PDF data from the external URL
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        // Convert the response data to a Buffer
-        const dataBuffer = await response.buffer();
-        console.log("successfully fetched pdf buffer")
-        return dataBuffer;
-    } catch (error: any) {
-        console.error(`Error: ${error.message}`);
-    }
-}
-
-async function getPdfText(pdf: any) {
-    const data = await pdfParse(pdf)
-    // console.log(data.text)
-    return data.text;
-}
-
-function publish_cv_summary(summary: any){
-    console.log("CV PUBLISHED!!!")
-}
-
 const SUMMARIZE_CV_PROMPT = `
 Please provide me a summary of the following CV. 
 The summary will describe the most important parts of the 
@@ -37,69 +11,12 @@ CV and what this person has accomplished in his or her career.
 If the document is not a CV don't summarize it and instead return a short rejection reasoning
 `
 
-export async function summarizeCV(cv_url: string) {
-    console.log("attempt connection to openai api")
-
-    try{
-        let pdf_buffer = await getPdf(cv_url);
-        let pdf_text = await getPdfText(pdf_buffer)
-        console.log("call openai api")
-        let chatCompletion = await openai.chat.completions.create({
-            messages: [{ role: 'user', content: `${SUMMARIZE_CV_PROMPT}\n CV text:\n\n${pdf_text}` }],
-            model: 'gpt-4-0613',
-            temperature: 0.2,
-            "functions": [
-                {
-                    "name": "compare_cv_summary",
-                    "description": "Use the CV summary to further process it",
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "summary": {
-                                "type": "string",
-                                "description": "The Summary of the given CV in text form"
-                            }
-                        },
-                        "required": ["summary"]
-                    }
-                },
-                {
-                    "name": "reject_noncv_document",
-                    "description": "Reject Non-CV documents",
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "rejection_reason": {
-                                "type": "string",
-                                "description": "The reason the text was rejected"
-                            }
-                        },
-                        "required": ["rejection_reason"]
-                    }
-                },
-            ],
-            "function_call": "auto"
-        });
-        return chatCompletion.choices[0];
-    }
-    catch(error: any){
-        console.error(error)
-        return {}
-    }
-    return {}
-    
-}
-
 const COMPARE_PROMPT = `For this task you will receive two summaries, 
 the first summary is the candidate CV summary and the second is a job description. 
 Please analyze and understand each summary. After that please provide a number that 
 determines how strong the candidate fits the job description, 
 a verdict that says if the candidate is a Good, Medium or Bad fit for the role, 
 and lastly a short reasoning why.
-`
-
-const example_cv_summ=`
-Rachel Green is a highly accomplished academic with a PhD in English from the University of Illinois at Urbana-Champaign. Her dissertation focused on World War One and the emergence of literary modernism in the American South. She has extensive teaching experience, having served as a Composition Instructor, Literature Instructor, Coordinating Group Leader, Discussion Leader, and Teaching Assistant at the University of Illinois. Her research experience includes a role as a Doctoral Researcher and Research Assistant, with a focus on the literature of William Faulkner, Thomas Wolfe, and Tennessee Williams. She has several publications and has presented at numerous conferences. She has received several honors and awards, including the Jacob K. Javitz Fellowship and the Graduate College Dissertation Completion Award. She has also served in various professional and university service roles, including Managing Editor of the Southern Literary Journal and Graduate Mentor at The Career Center. She is a member of several professional associations, including the Modern Language Association and the American Literature Association.
 `
 
 const example_job_desc= `
@@ -149,9 +66,116 @@ Review of applications will begin on [Insert Date] and will continue until the p
 The institution is an equal opportunity employer and welcomes applications from candidates of all backgrounds.
 `
 
+async function getPdf(url: string) {
+    try {
+        // Fetch PDF data from the external URL
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        // Convert the response data to a Buffer
+        const dataBuffer = await response.buffer();
+        console.log("successfully fetched pdf buffer")
+        return dataBuffer;
+    } catch (error: any) {
+        console.error(`Error: ${error.message}`);
+    }
+}
+
+async function getPdfText(pdf: any) {
+    const data = await pdfParse(pdf)
+    // console.log(data.text)
+    return data.text;
+}
+
+export async function getCVtoJobEval(cv_pdf_url: string, job_desc: string){
+    try{
+        var cv_summary_prompt_res = await summarizeCV(cv_pdf_url) as OpenAI.Chat.ChatCompletion;
+        var function_call = cv_summary_prompt_res.choices[0].message.function_call || undefined
+        if(function_call){
+            if(function_call.name == "compare_cv_summary"){
+                console.log(`Document ${cv_pdf_url} was deemed to be a valid CV and summarized.`)
+                let function_args = JSON.parse(function_call.arguments)
+                //compare the cv summary to the job posting
+                console.log("Matching the summarized CV against the provided Job Description...")
+                var cv_job_match_eval = await compareCVtoJobDesc(function_args.summary, example_job_desc)
+                return cv_job_match_eval.choices[0]
+            }
+            else if(function_call.name == "reject_noncv_document"){
+                console.log(`Document ${cv_pdf_url} was deemed to NOT be a CV and thus rejected.`)
+                let function_args = JSON.parse(function_call.arguments)
+                console.log(function_args)
+                return cv_summary_prompt_res.choices[0]
+            }
+            else{
+                console.log("OpenAI responnse does not contain a mapped function call")
+            }
+        }
+        else{
+            console.log("No function_call in response object of OpenAI CV Summary Response")
+        }
+    }
+    catch(error: any){
+        console.error(error)
+    }
+    return false
+}
+
+async function summarizeCV(cv_url: string) {
+    console.log("attempt connection to openai api")
+
+    try{
+        let pdf_buffer = await getPdf(cv_url);
+        let pdf_text = await getPdfText(pdf_buffer)
+        console.log("call openai api")
+        let chatCompletion = await openai.chat.completions.create({
+            messages: [{ role: 'user', content: `${SUMMARIZE_CV_PROMPT}\n CV text:\n\n${pdf_text}` }],
+            model: 'gpt-4-0613',
+            temperature: 0.2,
+            "functions": [
+                {
+                    "name": "compare_cv_summary",
+                    "description": "Use the CV summary to further process it",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "summary": {
+                                "type": "string",
+                                "description": "The Summary of the given CV in text form"
+                            }
+                        },
+                        "required": ["summary"]
+                    }
+                },
+                {
+                    "name": "reject_noncv_document",
+                    "description": "Reject Non-CV documents",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "rejection_reason": {
+                                "type": "string",
+                                "description": "The reason the text was rejected"
+                            }
+                        },
+                        "required": ["rejection_reason"]
+                    }
+                },
+            ],
+            "function_call": "auto"
+        });
+        return chatCompletion;
+    }
+    catch(error: any){
+        console.error(error)
+        return {}
+    }
+    return {}
+    
+}
 
 
-export async function compareCVtoJobDesc(cv_summ: string, job_desc: string) {
+async function compareCVtoJobDesc(cv_summ: string, job_desc: string) {
 
     const chatCompletion = await openai.chat.completions.create({
         messages: [
@@ -188,5 +212,5 @@ export async function compareCVtoJobDesc(cv_summ: string, job_desc: string) {
           ],
           "function_call": "auto"
       });
-    return chatCompletion.choices[0];
+    return chatCompletion;
 }
