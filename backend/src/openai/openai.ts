@@ -4,6 +4,22 @@ import OpenAI from 'openai';
 
 const openai = new OpenAI();
 
+const openai_model = 'gpt-3.5-turbo'
+
+const SYSTEM_CONFIG_PROMPT = `
+For this task you will receive both a candidate CV and a job description. 
+Please analyze and understand each. After that please provide a number that 
+determines how strong the candidate fits the job description, 
+a verdict that says if the candidate is a Good, Medium or Bad Fit for the role, 
+and lastly a short reasoning why.
+The score and the verdict should map as follows: score 0.0 until 3.0 is a Bad Fit, 
+3.1 until 6.0 is a Medium Fit, 6.1 until 8.5 is a Good Fit and everything scored 8.6 until 10 is a Perfect Fit.
+The matching should be extremely strict and for a candidate to receive a score higher than 6.0 
+they should fit the description almost perfectly.
+If the provided CV Text is not really a CV don't math it against the job description 
+and instead return Bad fit and a score of 0.0 together with a short rejection reasoning.
+`
+
 const SUMMARIZE_CV_PROMPT = `
 Please provide me a summary of the following CV. 
 The summary will describe the most important parts of the 
@@ -88,40 +104,7 @@ async function getPdfText(pdf: any) {
     return data.text;
 }
 
-export async function getCVtoJobEval(cv_pdf_url: string, job_desc: string){
-    try{
-        var cv_summary_prompt_res = await summarizeCV(cv_pdf_url) as OpenAI.Chat.ChatCompletion;
-        var function_call = cv_summary_prompt_res.choices[0].message.function_call || undefined
-        if(function_call){
-            if(function_call.name == "compare_cv_summary"){
-                console.log(`Document ${cv_pdf_url} was deemed to be a valid CV and summarized.`)
-                let function_args = JSON.parse(function_call.arguments)
-                //compare the cv summary to the job posting
-                console.log("Matching the summarized CV against the provided Job Description...")
-                var cv_job_match_eval = await compareCVtoJobDesc(function_args.summary, example_job_desc)
-                return cv_job_match_eval.choices[0]
-            }
-            else if(function_call.name == "reject_noncv_document"){
-                console.log(`Document ${cv_pdf_url} was deemed to NOT be a CV and thus rejected.`)
-                let function_args = JSON.parse(function_call.arguments)
-                console.log(function_args)
-                return cv_summary_prompt_res.choices[0]
-            }
-            else{
-                console.log("OpenAI responnse does not contain a mapped function call")
-            }
-        }
-        else{
-            console.log("No function_call in response object of OpenAI CV Summary Response")
-        }
-    }
-    catch(error: any){
-        console.error(error)
-    }
-    return false
-}
-
-async function summarizeCV(cv_url: string) {
+export async function summarizeCV(cv_url: string) {
     console.log("attempt connection to openai api")
 
     try{
@@ -130,7 +113,7 @@ async function summarizeCV(cv_url: string) {
         console.log("call openai api")
         let chatCompletion = await openai.chat.completions.create({
             messages: [{ role: 'user', content: `${SUMMARIZE_CV_PROMPT}\n CV text:\n\n${pdf_text}` }],
-            model: 'gpt-4-0613',
+            model: openai_model,
             temperature: 0.2,
             "functions": [
                 {
@@ -174,43 +157,79 @@ async function summarizeCV(cv_url: string) {
     
 }
 
-
-async function compareCVtoJobDesc(cv_summ: string, job_desc: string) {
-
-    const chatCompletion = await openai.chat.completions.create({
-        messages: [
-            { 
-                role: 'user', 
-                content: `${COMPARE_PROMPT}\nCV summary:\n\n${example_cv_summ}\n\nJob Description:\n\n${example_job_desc}` 
-            }
-        ],
-        model: 'gpt-4-0613',
-        temperature: 0.2,
-        functions: [
-            {
-              "name": "save_cv_fit_evaluation",
-              "description": "Process the evaluation of how well the candidate CV summary fits the Job Description",
-              "parameters": {
-                "type": "object",
-                "properties": {
-                  "fit_score": {
-                    "type": "number",
-                    "description": "A score of how well the summarized CV fits the Job description. Score mut be a number between 0.0 and 10.0"
-                  },
-                  "verdict": {
-                    "type": "string",
-                    "description": "The verdict in comprehensible words if the candidate is a good choice or not. Must be one of 'Perfect Fit', 'Good Fit', 'Medium Fit' or 'Bad Fit' based on fit_score"
-                  },
-                  "reasoning": {
-                    "type": "string",
-                    "description": "A short explanation of the decision why the candidate is a good fit or not."
+export async function getCVtoJobMatch(cv_url: string, job_desc: string){
+    console.log("try doing CV eval in one query")
+    try{
+        let pdf_buffer = await getPdf(cv_url);
+        let pdf_text = await getPdfText(pdf_buffer)
+        console.log("call openai api")
+        let chatCompletion = await openai.chat.completions.create({
+            messages: [
+                { role: 'system', content: SYSTEM_CONFIG_PROMPT},
+                { role: 'user', content: `CV text:\n\n${pdf_text}\n\nJob Description:\n\n${example_job_desc}` }
+            
+            ],
+            model: openai_model,
+            temperature: 0.2,
+            functions: [
+                {
+                  "name": "save_cv_fit_evaluation",
+                  "description": "Process the evaluation of how well the candidate CV fits the Job Description",
+                  "parameters": {
+                    "type": "object",
+                    "properties": {
+                      "fit_score": {
+                        "type": "number",
+                        "description": "A score of how well the CV fits the Job description. Score mut be a number between 0.0 and 10.0"
+                      },
+                      "verdict": {
+                        "type": "string",
+                        "description": "The verdict in comprehensible words if the candidate is a good choice or not. Must be one of 'Perfect Fit', 'Good Fit', 'Medium Fit' or 'Bad Fit' based on fit_score"
+                      },
+                      "reasoning": {
+                        "type": "string",
+                        "description": "A short explanation of the decision why the candidate is a good fit or not."
+                      }
+                    },
+                    "required": ["fit_score", "verdict", "reasoning"]
                   }
-                },
-                "required": ["fit_score", "verdict", "reasoning"]
-              }
+                }
+              ],
+              "function_call": {"name": "save_cv_fit_evaluation"}
+        }) as OpenAI.Chat.ChatCompletion;
+
+        var function_call = chatCompletion.choices[0].message.function_call || undefined
+        if(function_call){
+            if(function_call.name == "save_cv_fit_evaluation"){
+                console.log(`Document ${cv_url} was evaluated and returned the required format.`)
+                let function_args = JSON.parse(function_call.arguments)
+
+                return function_args
             }
-          ],
-          "function_call": "auto"
-      });
-    return chatCompletion;
+            else{
+                console.log("OpenAI response does not contain a mapped function call")
+                return {
+                    status: `${function_call} is not a valid function call`,
+                    message: chatCompletion.choices[0].message
+                }
+            }
+        }
+        else{
+            console.log("No function_call in response object of OpenAI CV Summary Response")
+            return {
+                status: `No function call present in message`,
+                message: chatCompletion.choices[0].message
+            }
+        }
+
+        return {};
+
+    }
+    catch(error){
+        console.error(error)
+        return {
+            status: `Error while evaluating CV`,
+            error: error
+        }
+    }
 }
