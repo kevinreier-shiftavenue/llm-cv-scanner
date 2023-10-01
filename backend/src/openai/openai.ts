@@ -92,6 +92,7 @@ async function getPdf(url: string) {
         return dataBuffer;
     } catch (error: any) {
         console.error(`Error: ${error.message}`);
+        throw error
     }
 }
 
@@ -111,59 +112,6 @@ function evaluateMatch(score: number): string {
     } else {
         return 'Perfect Match';
     }
-}
-
-export async function summarizeCV(cv_url: string) {
-    console.log("attempt connection to openai api")
-
-    try{
-        let pdf_buffer = await getPdf(cv_url);
-        let pdf_text = await getPdfText(pdf_buffer)
-        console.log("call openai api")
-        let chatCompletion = await openai.chat.completions.create({
-            messages: [{ role: 'user', content: `${SUMMARIZE_CV_PROMPT}\n CV text:\n\n${pdf_text}` }],
-            model: openai_model,
-            temperature: 0.2,
-            "functions": [
-                {
-                    "name": "compare_cv_summary",
-                    "description": "Use the CV summary to further process it",
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "summary": {
-                                "type": "string",
-                                "description": "The Summary of the given CV in text form"
-                            }
-                        },
-                        "required": ["summary"]
-                    }
-                },
-                {
-                    "name": "reject_noncv_document",
-                    "description": "Reject Non-CV documents",
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "rejection_reason": {
-                                "type": "string",
-                                "description": "The reason the text was rejected"
-                            }
-                        },
-                        "required": ["rejection_reason"]
-                    }
-                },
-            ],
-            "function_call": "auto"
-        });
-        return chatCompletion;
-    }
-    catch(error: any){
-        console.error(error)
-        return {}
-    }
-    return {}
-    
 }
 
 export async function getCVtoJobMatch(cv_url: string, job_desc: string){
@@ -208,13 +156,17 @@ export async function getCVtoJobMatch(cv_url: string, job_desc: string){
             if(function_call.name == "save_cv_fit_evaluation"){
                 console.log(`Document ${cv_url} was evaluated and returned the required format.`)
                 let function_args = JSON.parse(function_call.arguments)
-
-                return function_args
+                let resp = {
+                    status: "Success",
+                    ...function_args
+                }
+                return resp
             }
             else{
                 console.log("OpenAI response does not contain a mapped function call")
                 return {
-                    status: `${function_call} is not a valid function call`,
+                    status: "Error",
+                    reason: `${function_call} is not a valid function call`,
                     message: chatCompletion.choices[0].message
                 }
             }
@@ -222,18 +174,17 @@ export async function getCVtoJobMatch(cv_url: string, job_desc: string){
         else{
             console.log("No function_call in response object of OpenAI CV Summary Response")
             return {
-                status: `No function call present in message`,
+                status: "Error",
+                reason: `No function call present in message`,
                 message: chatCompletion.choices[0].message
             }
         }
-
-        return {};
-
     }
     catch(error){
         console.error(error)
         return {
-            status: `Error while evaluating CV`,
+            status: "Error",
+            reason: `Error while evaluating CV`,
             error: error
         }
     }
